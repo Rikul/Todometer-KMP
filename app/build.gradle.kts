@@ -130,6 +130,12 @@ android {
         jvmToolchain(17)
     }
 
+    sourceSets {
+        getByName("androidTest") {
+            kotlin.setSrcDirs(listOf("src/androidTest/kotlin"))
+        }
+    }
+
     dependencies {
         baselineProfile(projects.macrobenchmark)
 
