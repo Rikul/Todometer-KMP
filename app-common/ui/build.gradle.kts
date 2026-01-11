@@ -27,6 +27,12 @@ kotlin {
             implementation(libs.mockk.common)
             implementation(kotlin("test"))
         }
+
+        val androidMain by getting
+        androidMain.dependencies {
+            implementation(libs.androidx.activityCompose)
+        }
+
         val desktopMain by getting
         desktopMain.dependencies {
             api(libs.jetbrains.kotlin.coroutines.swing)

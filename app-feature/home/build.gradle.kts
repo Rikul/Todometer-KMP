@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
+    alias(libs.plugins.jetbrains.kotlinSerialization)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.common.ui)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
@@ -20,6 +21,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.appCommon.ui)
             implementation(projects.appCommon.uiTooling)
+            implementation(libs.jetbrains.kotlinx.serialization.json)
         }
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")

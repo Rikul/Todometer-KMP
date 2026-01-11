@@ -132,7 +132,7 @@ android {
 
     sourceSets {
         getByName("androidTest") {
-            kotlin.setSrcDirs(listOf("src/androidTest/kotlin"))
+            kotlin.setSrcDirs(listOf("src/androidInstrumentedTest/kotlin"))
         }
     }
 
@@ -144,7 +144,11 @@ android {
         "demoImplementation"(projects.common.demoDatabase)
 
         androidTestImplementation(libs.androidx.test.junit)
+        androidTestImplementation(libs.androidx.test.espresso.intents)
         androidTestImplementation(libs.jetbrains.compose.ui.test.junit4)
+        androidTestImplementation(libs.jetbrains.kotlinx.serialization.json)
+        androidTestImplementation(projects.common.domain)
+        androidTestImplementation(libs.koin.core)
         debugImplementation(libs.androidx.compose.ui.test.manifest)
     }
 }
