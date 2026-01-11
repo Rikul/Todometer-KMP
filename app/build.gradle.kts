@@ -85,6 +85,8 @@ android {
 
         versionCode = 1294401
         versionName = "android-2.9.4"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -134,6 +136,10 @@ android {
         implementation(libs.androidx.profileinstaller)
 
         "demoImplementation"(projects.common.demoDatabase)
+
+        androidTestImplementation(libs.androidx.test.junit)
+        androidTestImplementation(libs.jetbrains.compose.ui.test.junit4)
+        debugImplementation(libs.androidx.compose.ui.test.manifest)
     }
 }
 

@@ -20,3 +20,6 @@ local.properties
 /wearapp-wearos/release/*
 todometer_preferences.preferences_pb
 /.kotlin/
+CLAUDE.md
+plan.md
+GEMINI.md

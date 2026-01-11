@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 fun AddChecklistItemField(
@@ -76,7 +77,7 @@ fun AddChecklistItemField(
             ) {
                 Icon(
                     Images.Icons.Check,
-                    contentDescription = null,
+                    contentDescription = TodometerResources.strings.add,
                     tint = MaterialTheme.colorScheme.primary,
                 )
             }
