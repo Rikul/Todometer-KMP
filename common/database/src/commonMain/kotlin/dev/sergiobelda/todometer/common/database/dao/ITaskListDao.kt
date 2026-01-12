@@ -38,4 +38,6 @@ interface ITaskListDao {
     suspend fun updateTaskLists(taskLists: List<TaskListEntity>)
 
     suspend fun deleteTaskList(id: String)
+
+    suspend fun deleteAllTaskLists()
 }

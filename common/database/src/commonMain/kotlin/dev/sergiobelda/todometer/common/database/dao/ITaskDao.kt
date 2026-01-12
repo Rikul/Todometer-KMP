@@ -44,5 +44,9 @@ interface ITaskDao {
 
     suspend fun deleteTasks(vararg ids: String)
 
+    suspend fun deleteAllTasks()
+
     suspend fun toggleTaskPinnedValue(id: String)
+
+    suspend fun getAllTasks(): List<TaskEntity>
 }

@@ -42,7 +42,9 @@ import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDiv
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Description
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Info
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Replay
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Settings
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.resources.TodometerResources
@@ -57,6 +59,8 @@ internal fun HomeDrawerContent(
     onTaskListItemClick: (String) -> Unit,
     onSettingsItemClick: () -> Unit,
     onAboutItemClick: () -> Unit,
+    onBackupItemClick: () -> Unit,
+    onRestoreItemClick: () -> Unit,
 ) {
     ModalDrawerSheet {
         Box(
@@ -81,6 +85,8 @@ internal fun HomeDrawerContent(
         Column(modifier = Modifier.padding(HomeDrawerItemPadding)) {
             HomeNavigationDrawerSettingsItem(onSettingsItemClick)
             HomeNavigationDrawerAboutItem(onAboutItemClick)
+            HomeNavigationDrawerBackupItem(onBackupItemClick)
+            HomeNavigationDrawerRestoreItem(onRestoreItemClick)
         }
     }
 }
@@ -118,6 +124,48 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
         label = {
             Text(
                 text = TodometerResources.strings.about,
+                style = MaterialTheme.typography.titleSmall,
+                maxLines = HOME_DRAWER_ITEM_MAX_LINES,
+            )
+        },
+        onClick = onClick,
+        selected = false,
+    )
+}
+
+@Composable
+private fun HomeNavigationDrawerBackupItem(onClick: () -> Unit) {
+    NavigationDrawerItem(
+        icon = {
+            Icon(
+                Images.Icons.Description,
+                contentDescription = null,
+            )
+        },
+        label = {
+            Text(
+                text = TodometerResources.strings.backupData,
+                style = MaterialTheme.typography.titleSmall,
+                maxLines = HOME_DRAWER_ITEM_MAX_LINES,
+            )
+        },
+        onClick = onClick,
+        selected = false,
+    )
+}
+
+@Composable
+private fun HomeNavigationDrawerRestoreItem(onClick: () -> Unit) {
+    NavigationDrawerItem(
+        icon = {
+            Icon(
+                Images.Icons.Replay,
+                contentDescription = null,
+            )
+        },
+        label = {
+            Text(
+                text = TodometerResources.strings.restoreData,
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HOME_DRAWER_ITEM_MAX_LINES,
             )

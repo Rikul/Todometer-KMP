@@ -31,4 +31,8 @@ interface ITaskChecklistItemDao {
     )
 
     suspend fun deleteTaskChecklistItem(id: String)
+
+    suspend fun deleteAllTaskChecklistItems()
+
+    suspend fun getAllTaskChecklistItems(): List<TaskChecklistItemEntity>
 }

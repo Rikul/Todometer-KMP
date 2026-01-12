@@ -65,3 +65,6 @@ WHERE id = ?;
 deleteTask:
 DELETE FROM TaskEntity
 WHERE id = ?;
+
+deleteAllTasks:
+DELETE FROM TaskEntity;

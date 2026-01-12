@@ -23,10 +23,12 @@ import dev.sergiobelda.todometer.common.data.localdatasource.ITaskLocalDataSourc
 import dev.sergiobelda.todometer.common.data.localdatasource.TaskChecklistItemLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.TaskListLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.TaskLocalDataSource
+import dev.sergiobelda.todometer.common.data.repository.BackupRepository
 import dev.sergiobelda.todometer.common.data.repository.TaskChecklistItemsRepository
 import dev.sergiobelda.todometer.common.data.repository.TaskListRepository
 import dev.sergiobelda.todometer.common.data.repository.TaskRepository
 import dev.sergiobelda.todometer.common.data.repository.UserPreferencesRepository
+import dev.sergiobelda.todometer.common.domain.repository.IBackupRepository
 import dev.sergiobelda.todometer.common.database.createDatabase
 import dev.sergiobelda.todometer.common.database.dao.ITaskChecklistItemDao
 import dev.sergiobelda.todometer.common.database.dao.ITaskDao
@@ -75,6 +77,7 @@ data object TodometerDataDIModule : TodometerDIModule {
         singleOf(::TaskRepository) bind ITaskRepository::class
         singleOf(::UserPreferencesRepository) bind IUserPreferencesRepository::class
         singleOf(::TaskChecklistItemsRepository) bind ITaskChecklistItemsRepository::class
+        singleOf(::BackupRepository) bind IBackupRepository::class
     }
 }
 

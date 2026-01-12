@@ -95,6 +95,8 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.id.elementId
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.launch
+import dev.sergiobelda.todometer.app.common.ui.files.rememberToDometerFileSaver
+import dev.sergiobelda.todometer.app.common.ui.files.rememberToDometerFilePicker
 
 // TODO: Resolve LongMethod issue.
 @Suppress("LongMethod")
@@ -129,6 +131,52 @@ fun HomeScreen(
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTasksAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
+    var restoreDataAlertDialogState by remember { mutableStateOf(false) }
+
+    val backupSuccessfulMessage = TodometerResources.strings.backupSuccessful
+    val restoreSuccessfulMessage = TodometerResources.strings.restoreSuccessful
+    val restoreFailedMessage = TodometerResources.strings.restoreFailed
+
+    val fileSaver = rememberToDometerFileSaver(
+        fileName = "TodometerBackup.json",
+        title = TodometerResources.strings.backupData,
+        onFileSaved = {
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(
+                    backupSuccessfulMessage,
+                    duration = SnackbarDuration.Short,
+                    withDismissAction = true,
+                )
+            }
+        },
+    )
+
+    val filePicker = rememberToDometerFilePicker(
+        title = TodometerResources.strings.restoreData,
+        onFilePicked = { json ->
+            viewModel.restoreData(
+                json,
+                onSuccess = {
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(
+                            restoreSuccessfulMessage,
+                            duration = SnackbarDuration.Short,
+                            withDismissAction = true,
+                        )
+                    }
+                },
+                onFailure = {
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(
+                            restoreFailedMessage,
+                            duration = SnackbarDuration.Short,
+                            withDismissAction = true,
+                        )
+                    }
+                },
+            )
+        },
+    )
 
     val defaultTaskListName = TodometerResources.strings.defaultTaskListName
 
@@ -159,6 +207,18 @@ fun HomeScreen(
                 },
                 onAboutItemClick = {
                     drawerAction(navigateToAbout)
+                },
+                onBackupItemClick = {
+                    drawerAction {
+                        viewModel.backupData { json ->
+                            fileSaver(json)
+                        }
+                    }
+                },
+                onRestoreItemClick = {
+                    drawerAction {
+                        restoreDataAlertDialogState = true
+                    }
                 },
             )
         },
@@ -230,6 +290,15 @@ fun HomeScreen(
                     DeleteTaskListAlertDialog(
                         onDismissRequest = { deleteTaskListAlertDialogState = false },
                         onDeleteTaskListClick = viewModel::deleteTaskList,
+                    )
+                }
+                if (restoreDataAlertDialogState) {
+                    RestoreDataAlertDialog(
+                        onDismissRequest = { restoreDataAlertDialogState = false },
+                        onConfirm = {
+                            restoreDataAlertDialogState = false
+                            filePicker()
+                        },
                     )
                 }
                 if (viewModel.state.isLoadingTasks) {

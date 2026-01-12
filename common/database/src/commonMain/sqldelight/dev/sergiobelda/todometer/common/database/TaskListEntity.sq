@@ -43,3 +43,6 @@ WHERE id = ?;
 deleteTaskList:
 DELETE FROM TaskListEntity
 WHERE id = ?;
+
+deleteAllTaskLists:
+DELETE FROM TaskListEntity;

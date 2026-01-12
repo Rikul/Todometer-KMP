@@ -13,6 +13,10 @@ SELECT *
 FROM TaskChecklistItemEntity
 WHERE task_id = ? ORDER BY state DESC;
 
+selectAllTaskChecklistItems:
+SELECT *
+FROM TaskChecklistItemEntity;
+
 insertTaskChecklistItem:
 INSERT OR REPLACE INTO TaskChecklistItemEntity
 (id, text, task_id, state)
@@ -26,3 +30,6 @@ WHERE id = ?;
 
 deleteTaskChecklistItem:
 DELETE FROM TaskChecklistItemEntity WHERE id = ?;
+
+deleteAllTaskChecklistItems:
+DELETE FROM TaskChecklistItemEntity;

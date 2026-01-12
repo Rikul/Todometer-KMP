@@ -32,6 +32,10 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSe
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.backup.BackupDataUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.backup.RestoreDataUseCase
+import dev.sergiobelda.todometer.common.domain.model.BackupData
+import kotlinx.serialization.json.Json
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.delay
@@ -48,6 +52,8 @@ class HomeViewModel(
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
     private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase,
+    private val backupDataUseCase: BackupDataUseCase,
+    private val restoreDataUseCase: RestoreDataUseCase,
 ) : ViewModel() {
     var state by mutableStateOf(HomeState(isLoadingTasks = true))
         private set
@@ -177,6 +183,24 @@ class HomeViewModel(
                 }
             }
             clearSelectedTasks()
+        }
+
+    fun backupData(onSuccess: (String) -> Unit) =
+        viewModelScope.launch {
+            val backupData = backupDataUseCase()
+            val json = Json.encodeToString(BackupData.serializer(), backupData)
+            onSuccess(json)
+        }
+
+    fun restoreData(json: String, onSuccess: () -> Unit, onFailure: () -> Unit) =
+        viewModelScope.launch {
+            try {
+                val backupData = Json.decodeFromString(BackupData.serializer(), json)
+                restoreDataUseCase(backupData)
+                onSuccess()
+            } catch (e: Exception) {
+                onFailure()
+            }
         }
 
     companion object {

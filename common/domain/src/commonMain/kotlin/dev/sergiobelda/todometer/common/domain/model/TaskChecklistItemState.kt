@@ -16,6 +16,9 @@
 
 package dev.sergiobelda.todometer.common.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class TaskChecklistItemState {
     UNCHECKED,
     CHECKED,

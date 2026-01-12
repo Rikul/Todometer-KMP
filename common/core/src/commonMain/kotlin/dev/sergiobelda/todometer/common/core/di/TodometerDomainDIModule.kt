@@ -43,6 +43,8 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUs
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNameUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.backup.BackupDataUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.backup.RestoreDataUseCase
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -80,5 +82,7 @@ data object TodometerDomainDIModule : TodometerDIModule {
         singleOf(::SetTaskChecklistItemCheckedUseCase)
         singleOf(::DeleteTaskChecklistItemUseCase)
         singleOf(::ToggleTaskPinnedValueUseCase)
+        singleOf(::BackupDataUseCase)
+        singleOf(::RestoreDataUseCase)
     }
 }

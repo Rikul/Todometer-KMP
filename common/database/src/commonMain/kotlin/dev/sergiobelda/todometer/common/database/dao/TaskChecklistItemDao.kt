@@ -58,4 +58,13 @@ class TaskChecklistItemDao(
     override suspend fun deleteTaskChecklistItem(id: String) {
         todometerDatabase.taskChecklistItemEntityQueries.deleteTaskChecklistItem(id)
     }
+
+    override suspend fun deleteAllTaskChecklistItems() {
+        todometerDatabase.taskChecklistItemEntityQueries.deleteAllTaskChecklistItems()
+    }
+
+    override suspend fun getAllTaskChecklistItems(): List<TaskChecklistItemEntity> =
+        todometerDatabase.taskChecklistItemEntityQueries
+            .selectAllTaskChecklistItems()
+            .executeAsList()
 }

@@ -103,4 +103,11 @@ class TaskDao(
     override suspend fun toggleTaskPinnedValue(id: String) {
         todometerDatabase.taskEntityQueries.toggleTaskPinnedValue(id)
     }
+
+    override suspend fun deleteAllTasks() {
+        todometerDatabase.taskEntityQueries.deleteAllTasks()
+    }
+
+    override suspend fun getAllTasks(): List<TaskEntity> =
+        todometerDatabase.taskEntityQueries.selectAllTasks().executeAsList()
 }

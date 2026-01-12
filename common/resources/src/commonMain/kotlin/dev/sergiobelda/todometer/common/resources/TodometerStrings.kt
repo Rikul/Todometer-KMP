@@ -25,6 +25,8 @@ data class TodometerStrings(
     val addTaskList: String,
     val appName: String = "Todometer",
     val back: String,
+    val backupData: String,
+    val backupSuccessful: String,
     val cancel: String,
     val cannotDeleteThisTaskList: String,
     val cannotEditThisTaskList: String,
@@ -80,6 +82,11 @@ data class TodometerStrings(
     val privacyPolicyPublicBody: String,
     val privacyPolicyUserData: String,
     val privacyPolicyUserDataBody: String,
+    val restoreData: String,
+    val restoreDataDialogBody: String,
+    val restoreDataDialogTitle: String,
+    val restoreFailed: String,
+    val restoreSuccessful: String,
     val save: String,
     val selectTime: String,
     val selected: String,
@@ -96,6 +103,7 @@ data class TodometerStrings(
     val uncheckTask: String,
     val youHaveCompletedAllTasks: String,
     val youHaveNotAnyTaskList: String,
+    val yes: String,
 )
 
 internal val Strings: Map<String, TodometerStrings> =
