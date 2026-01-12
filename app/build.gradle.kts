@@ -148,6 +148,7 @@ android {
         androidTestImplementation(libs.jetbrains.compose.ui.test.junit4)
         androidTestImplementation(libs.jetbrains.kotlinx.serialization.json)
         androidTestImplementation(projects.common.domain)
+        androidTestImplementation(projects.common.database)
         androidTestImplementation(libs.koin.core)
         debugImplementation(libs.androidx.compose.ui.test.manifest)
     }
